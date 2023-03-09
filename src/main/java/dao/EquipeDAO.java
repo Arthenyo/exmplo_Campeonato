@@ -8,10 +8,14 @@ import javax.persistence.EntityManager;
 public class EquipeDAO implements GenericDAO<Equipe>{
     private JpaPersistence jpaPersistence;
 
+    public EquipeDAO(){
+        this.jpaPersistence = new JpaPersistence();
+    }
+
     @Override
     public void saveOrUpdate(Equipe equipe) {
         this.jpaPersistence.getEm().getTransaction().begin();
-        this.jpaPersistence.getEm().persist(equipe);
+        this.jpaPersistence.getEm().merge(equipe);
         this.jpaPersistence.getEm().getTransaction().commit();
     }
 
